@@ -1,17 +1,26 @@
-# React + Vite
+# React memory cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+this project is a simple react project for a memory card game
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## development goals:
+- interacting with external APIs withen the react paradigme
+- handeling components through state management
+- practicing th proper implementation of the effect hook
+- styling
+- deployment
 
-## React Compiler
+## game in psudo code:
+- on intialization:
+    * fetch a number of photos and imbed within a card component
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- game loop:
+    * await player click
+    * if score === cards amount ? game stops, you win : continue
+    * if cardHasBeenClicked = false
+        - score counter++
+        - if score > bestscore ? then best score counter = score
+      else
+       - score = 0
+    * shuffle card randomly
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# memory-cards
