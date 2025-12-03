@@ -3,30 +3,47 @@ import { fetchPhoto } from '../Logic/api';
 
 import '../styles/card.css'
 ;
-function Card({hasbeenCLicked = false}){
-    const [status, setStatus] = useState(false);
+function Card({onClicked, onseSecondClick}){
     const [image, setImage] = useState(null);
-
-    //color change for development purposes
-    const [bgColor, setBgColor] = useState("white");
-      
-    //handelling gif load
+    const [status, setStatus] = useState(false);
+    //hchecks image loading correctly 
+    function imageLoads(link){
+        return new Promise(resolve=>{
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = link;
+        })
+    }
+    //handelling photo load
     useEffect(()=>{
-        const photo =fetchPhoto()
-        setImage(photo);
-    },[])
+        async function load(){
+            let validImg = null
 
+            while(!validImg){
+                const photo = await fetchPhoto();
+                const works = await imageLoads(photo)
+                if(works){
+                    validImg = photo
+                }
+            }
+            
+            setImage(validImg);            
+        }
+        load();
+
+    },[])
+    function handleClick(){
+        if(!status){
+            setStatus(true);
+            onClicked(status);
+        }else{
+            onseSecondClick();
+        }
+    }
     return(
     <div className="card"
-        onClick={()=>{
-            if(!hasbeenCLicked){
-                setStatus(true);
-                setBgColor(bgColor === "white" ? "lightblue" : "white");
-                console.log(status)
-                
-            }
-         }}
-        style={{backgroundColor: bgColor}}
+        onClick={handleClick}
         >
         <img src={image} alt="randomly generated photo"
                          height='300px'

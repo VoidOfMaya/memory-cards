@@ -3,10 +3,22 @@ import { Card } from './components/card';
 import './styles/App.css'
 
 function App() {
+
   const [score, setScore] = useState(0);
-  const bestScore = 0
-  
-  //handelling gif load
+  let bestScore = 0
+
+  function handleClicked(){
+    setScore(prev=>prev +1);
+  }
+  function handleSecondClicked(){
+    setScore(0);
+  }
+  function handleTopScore(){
+    if(bestScore < score){
+      bestScore = score
+    }
+    return bestScore
+  }
   function genCards(number){
     const array = []
     for(let i = 0; i < number ; i++){
@@ -15,7 +27,10 @@ function App() {
     return(
       <div className='card-grid'>
         {array.map((pos, index)=>(
-          <Card key={index} />
+          <Card key={index}
+                onClicked={handleClicked} 
+                onseSecondClick={handleSecondClicked}
+            />
         ))}
       </div>
       
@@ -28,7 +43,7 @@ function App() {
         <h4 className='instruction'>click on any card and memorize it , try not to click on the same card twice and see if you can catch them all </h4>
         <div className='score-tracker'>
           <h2>current score:{score}</h2>
-          <h2>best score:{ bestScore < score? bestScore = score: bestScore}</h2>
+          <h2>best score:{handleTopScore()}</h2>
         </div>
       </div>
 
