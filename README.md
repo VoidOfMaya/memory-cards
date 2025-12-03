@@ -24,3 +24,7 @@ this project is a simple react project for a memory card game
        - score = 0
     * shuffle card randomly
 
+### additional resources used:
+
+- Lorum picsum API: https://picsum.photos/
+
