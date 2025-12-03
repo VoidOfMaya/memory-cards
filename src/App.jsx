@@ -30,11 +30,15 @@ function App() {
   }
   return (
     <div className='App'>
-      <div className='score-tracker'>
-        <h2>current score:{score}</h2>
-        <h2>best score:{ bestScore < score? bestScore = score: bestScore}</h2>
+      <div className='header'>
+        <h1 className='title'>card memory Game</h1>
+        <h4 className='instruction'>click on any card and memorize it , try not to click on the same card twice and see if you can catch them all </h4>
+        <div className='score-tracker'>
+          <h2>current score:{score}</h2>
+          <h2>best score:{ bestScore < score? bestScore = score: bestScore}</h2>
+        </div>
       </div>
-      <h1>card memory Game</h1>
+
       {genCards(12)}
        
     </div>

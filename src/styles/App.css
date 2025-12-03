@@ -13,3 +13,19 @@
     width: min-content;
     height: min-content;
 }
+.header{
+    outline: 2px solid blue;
+    display: flex;
+    flex-direction: row;
+}
+.score-tracker{
+    outline: 2px solid green;
+    margin-left: auto;
+    padding: 10px;
+    
+}
+.title{
+    padding-left: 10px;
+    align-self: center;
+}
+.instruction{ align-self: end;}
