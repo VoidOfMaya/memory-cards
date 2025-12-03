@@ -6,6 +6,7 @@ import './styles/App.css'
 function App() {
   const [score, setScore] = useState(0);
   const [image, setImage] = useState(null);
+  const bestScore = 0
   
   //handelling gif load
   useEffect(()=>{
@@ -18,7 +19,6 @@ function App() {
     for(let i = 0; i < number ; i++){
       array.push(null);
     }
-    console.log(array)
     return(
       <div className='card-grid'>
         {array.map((pos, index)=>(
@@ -30,6 +30,10 @@ function App() {
   }
   return (
     <div className='App'>
+      <div className='score-tracker'>
+        <h2>current score:{score}</h2>
+        <h2>best score:{ bestScore < score? bestScore = score: bestScore}</h2>
+      </div>
       <h1>card memory Game</h1>
       {genCards(12)}
        
