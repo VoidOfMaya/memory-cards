@@ -48,8 +48,6 @@ function Card({onClicked, onseSecondClick}){
         <img src={image} alt="randomly generated photo"
                          height='300px'
                          width='300px'></img>
-        <h3>card example </h3>
-
     </div>
 )
 }
