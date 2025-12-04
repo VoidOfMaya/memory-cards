@@ -3,9 +3,8 @@ import { fetchPhoto } from '../Logic/api';
 
 import '../styles/card.css'
 ;
-function Card({onClicked, onseSecondClick}){
+function Card(){
     const [image, setImage] = useState(null);
-    const [status, setStatus] = useState(false);
     //hchecks image loading correctly 
     function imageLoads(link){
         return new Promise(resolve=>{
@@ -33,26 +32,12 @@ function Card({onClicked, onseSecondClick}){
         load();
 
     },[])
-    //resets card status
-    function resetCard (){
-        setStatus(false);
-    }
-    function handleClick(){
-        if(!status){
-            setStatus(true);
-            onClicked(status);
-        }else{
-            onseSecondClick();
-            resetCard();
-        }
-    }
+
     return(
-    <div className="card"
-        onClick={handleClick}
-        >
-        <img src={image} alt="randomly generated photo"
-                         height='300px'
-                         width='300px'></img>
+    <div className="card">
+        <img src={image}    className='card-photos' 
+                            alt="randomly generated photo"
+                            style={{borderRadius: '15px'}}></img>
     </div>
 )
 }

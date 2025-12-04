@@ -5,6 +5,7 @@ import './styles/App.css'
 function App() {
   const [score, setScore] = useState({score: 0, topScore: 0});
   const [attempt, setAttempt] = useState(0);
+  const[cards, setCards] = useState(genCardStats(12));
 
 
   //handles first click
@@ -16,7 +17,9 @@ function App() {
         topScore: newScore>prev.topScore ? newScore: prev.topScore
       };
     });
+    if(newRound) setNewRound(false);
     setAttempt(prev => prev + 1);
+    
     
   }
   //handles  second click on the same card
@@ -25,6 +28,7 @@ function App() {
       score: 0,
       topScore: prev.topScore
     }));
+    if(newRound) setNewRound(true);
     setAttempt(prev => prev + 1);
   }
   //handle card shuffle
@@ -45,13 +49,22 @@ function App() {
   }
   useEffect(()=>{
 
+
     shuffleCards();
   },[attempt])
   //generates cards
+  function genCardStats(number){
+    const array= [];
+    for(let i = 0 ; i < number ; i++){
+      array.push({id: i,clicked: false});
+      return array
+    }
+
+  }
   const cardArray = []
   function genCards(number){
     
-    for(let i = 0; i < number ; i++){
+    for(let i = cards.length; i <= number ; i++){
       cardArray.push(null);
     }
     
@@ -59,8 +72,6 @@ function App() {
       <div className='card-grid'>
         {cardArray.map((pos, index)=>(
           <Card key={index}
-                onClicked={handleClicked} 
-                onseSecondClick={handleSecondClicked}
             />
         ))}
       </div>
