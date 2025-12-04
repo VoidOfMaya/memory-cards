@@ -33,6 +33,10 @@ function Card({onClicked, onseSecondClick}){
         load();
 
     },[])
+    //resets card status
+    function resetCard (){
+        setStatus(false);
+    }
     function handleClick(){
         if(!status){
             setStatus(true);
