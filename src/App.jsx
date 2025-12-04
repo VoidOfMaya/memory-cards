@@ -33,7 +33,7 @@ function App() {
   //handle card shuffle
   function shuffleCards(){
     //get cards and grid
-    const grid = document.getElementsByClassName('card-grid');
+    const grid = document.querySelector('.card-grid');
     const cards = Array.from(document.getElementsByClassName('card'));
     console.log(cards);
     //shuffle positions
@@ -49,6 +49,7 @@ function App() {
   useEffect(()=>{
     if(score.score === 0) return;
     console.log(`setting card`);
+    shuffleCards();
   },[attempt])
   //generates cards
   const cardArray = []
