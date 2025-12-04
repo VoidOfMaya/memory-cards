@@ -48,7 +48,6 @@ function App() {
     });
     setAttempt(perv=>perv+1);
   }
-
   //handle card shuffle
   function shuffleCards(){
     //get cards and grid
@@ -75,7 +74,7 @@ function App() {
     return array  
     
   }
- 
+  //populate App with cards
   function genCards(){
     //console.log(cards)
     return(
