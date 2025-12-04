@@ -13,24 +13,28 @@ function App() {
       const cardClicked = cards.find(card=>card.id === id);
       if(cardClicked && cardClicked.clicked){
         handleSecondClicked();
+        shuffleCards();
       }else{
-        console.log(` youve clicked a new card`)
-        setCards(lastCards =>{
-          return lastCards.map(card=> card.id === id ?{...card, clicked: true}: card )
-        })
-        setScore(prev=>{
-          const newScore = prev.score + 1;
-          return{
-            score: newScore,
-            topScore: newScore>prev.topScore ? newScore: prev.topScore
-          };
-        });
-        
-        setAttempt(prev => prev + 1);
-      }
-    
+        validCard(id);
+        shuffleCards();
+    }
   }
-  //handles  second click on the same card and resets all cards to unclicked
+  //handels valid card clicks & updates score
+  function validCard(id){
+    console.log(` youve clicked a new card`)
+    setCards(lastCards =>{
+      return lastCards.map(card=> card.id === id ?{...card, clicked: true}: card )
+    })
+    setScore(prev=>{
+      const newScore = prev.score + 1;
+      return{
+        score: newScore,
+        topScore: newScore>prev.topScore ? newScore: prev.topScore
+      };
+    });    
+    setAttempt(prev => prev + 1);     
+  }
+  //handles  invalid card clicks & resets score
   function handleSecondClicked(){
     console.log(`Oops! youve clicked a card more then once`)
     setScore(prev =>{
@@ -42,7 +46,6 @@ function App() {
     setCards(prev =>{
       return prev.map(card =>({...card, clicked: false}))
     });
-    console.log(cards);
     setAttempt(perv=>perv+1);
   }
 
@@ -74,7 +77,7 @@ function App() {
   }
  
   function genCards(){
-    console.log(cards)
+    //console.log(cards)
     return(
       <div className='card-grid'>
         {cards.map(card=>(
