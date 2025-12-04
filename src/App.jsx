@@ -12,7 +12,7 @@ function App() {
   function handleClicked(id){
       const cardClicked = cards.find(card=>card.id === id);
       if(cardClicked && cardClicked.clicked){
-        handleSecondClicked();
+        invalidCard();
         shuffleCards();
       }else{
         validCard(id);
@@ -35,7 +35,7 @@ function App() {
     setAttempt(prev => prev + 1);     
   }
   //handles  invalid card clicks & resets score
-  function handleSecondClicked(){
+  function invalidCard(){
     console.log(`Oops! youve clicked a card more then once`)
     setScore(prev =>{
       return{
