@@ -4,3 +4,7 @@
     padding: 5px;
     margin-top: 10px;
 }
+.card:hover{
+    background-color: rgb(205, 232, 255);
+    transform: scale(1.1);
+}

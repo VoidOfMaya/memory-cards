@@ -3,12 +3,10 @@ import { Card } from './components/card';
 import './styles/App.css'
 
 function App() {
-
-  const [cards, setCards] = useState([])
   const [score, setScore] = useState({score: 0, topScore: 0});
   const [attempt, setAttempt] = useState(0);
 
-  
+
   //handles first click
   function handleClicked(){
     setScore(prev=>{
@@ -29,13 +27,11 @@ function App() {
     }));
     setAttempt(prev => prev + 1);
   }
-  //handel reset
   //handle card shuffle
   function shuffleCards(){
     //get cards and grid
     const grid = document.querySelector('.card-grid');
     const cards = Array.from(document.getElementsByClassName('card'));
-    console.log(cards);
     //shuffle positions
     for(let i = cardArray.length -1; i > 0; i--){
       const x = Math.floor(Math.random()*(i+1));
@@ -44,11 +40,11 @@ function App() {
     //append shuffled list to grid
     cards.forEach(card=>{
       grid.appendChild(card);
+
     });
   }
   useEffect(()=>{
-    if(score.score === 0) return;
-    console.log(`setting card`);
+
     shuffleCards();
   },[attempt])
   //generates cards

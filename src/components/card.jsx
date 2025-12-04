@@ -43,6 +43,7 @@ function Card({onClicked, onseSecondClick}){
             onClicked(status);
         }else{
             onseSecondClick();
+            resetCard();
         }
     }
     return(
