@@ -9,35 +9,50 @@ function App() {
 
 
   //handles first click
-  function handleClicked(){
-    setScore(prev=>{
-      const newScore = prev.score + 1;
-      return{
-        score: newScore,
-        topScore: newScore>prev.topScore ? newScore: prev.topScore
-      };
-    });
-    if(newRound) setNewRound(false);
-    setAttempt(prev => prev + 1);
-    
+  function handleClicked(id){
+      const cardClicked = cards.find(card=>card.id === id);
+      if(cardClicked && cardClicked.clicked){
+        handleSecondClicked();
+      }else{
+        console.log(` youve clicked a new card`)
+        setCards(lastCards =>{
+          return lastCards.map(card=> card.id === id ?{...card, clicked: true}: card )
+        })
+        setScore(prev=>{
+          const newScore = prev.score + 1;
+          return{
+            score: newScore,
+            topScore: newScore>prev.topScore ? newScore: prev.topScore
+          };
+        });
+        
+        setAttempt(prev => prev + 1);
+      }
     
   }
-  //handles  second click on the same card
+  //handles  second click on the same card and resets all cards to unclicked
   function handleSecondClicked(){
-    setScore(prev => ({
-      score: 0,
-      topScore: prev.topScore
-    }));
-    if(newRound) setNewRound(true);
-    setAttempt(prev => prev + 1);
+    console.log(`Oops! youve clicked a card more then once`)
+    setScore(prev =>{
+      return{
+        score: 0,
+        topScore: prev.topScore
+      }
+    });
+    setCards(prev =>{
+      return prev.map(card =>({...card, clicked: false}))
+    });
+    console.log(cards);
+    setAttempt(perv=>perv+1);
   }
+
   //handle card shuffle
   function shuffleCards(){
     //get cards and grid
     const grid = document.querySelector('.card-grid');
     const cards = Array.from(document.getElementsByClassName('card'));
     //shuffle positions
-    for(let i = cardArray.length -1; i > 0; i--){
+    for(let i = cards.length -1; i > 0; i--){
       const x = Math.floor(Math.random()*(i+1));
       [cards[i],cards[x]] = [cards[x],cards[i]];
     }
@@ -47,31 +62,25 @@ function App() {
 
     });
   }
-  useEffect(()=>{
-
-
-    shuffleCards();
-  },[attempt])
   //generates cards
   function genCardStats(number){
     const array= [];
     for(let i = 0 ; i < number ; i++){
-      array.push({id: i,clicked: false});
-      return array
+      array.push({id: i,clicked: false}); 
+      
     }
-
+    return array  
+    
   }
-  const cardArray = []
-  function genCards(number){
-    
-    for(let i = cards.length; i <= number ; i++){
-      cardArray.push(null);
-    }
-    
+ 
+  function genCards(){
+    console.log(cards)
     return(
       <div className='card-grid'>
-        {cardArray.map((pos, index)=>(
-          <Card key={index}
+        {cards.map(card=>(
+          <Card key={card.id}
+                id={card.id}
+                onClick={()=>handleClicked(card.id)}
             />
         ))}
       </div>
@@ -89,7 +98,7 @@ function App() {
         </div>
       </div>
 
-      {genCards(12)}
+      {genCards()}
        
     </div>
   )

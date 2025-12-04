@@ -3,7 +3,7 @@ import { fetchPhoto } from '../Logic/api';
 
 import '../styles/card.css'
 ;
-function Card(){
+function Card({onClick}){
     const [image, setImage] = useState(null);
     //hchecks image loading correctly 
     function imageLoads(link){
@@ -35,9 +35,11 @@ function Card(){
 
     return(
     <div className="card">
-        <img src={image}    className='card-photos' 
-                            alt="randomly generated photo"
-                            style={{borderRadius: '15px'}}></img>
+        <img src={image}    
+        className='card-photos'                
+        alt="randomly generated photo"
+        style={{borderRadius: '15px'}}
+        onClick={onClick}></img>
     </div>
 )
 }
